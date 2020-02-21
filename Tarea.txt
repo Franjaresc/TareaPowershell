@@ -1,0 +1,840 @@
+﻿**********************
+Inicio de la transcripción de Windows PowerShell
+Hora de inicio: 20200221111251
+Nombre de usuario: VLAD\Franj
+Usuario RunAs: VLAD\Franj
+Nombre de la configuración: 
+Máquina: VLAD (Microsoft Windows NT 10.0.18362.0)
+Aplicación host: C:\Windows\system32\WindowsPowerShell\v1.0\PowerShell_ISE.exe
+Id. de proceso: 3932
+PSVersion: 5.1.18362.628
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.18362.628
+BuildVersion: 10.0.18362.628
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+La transcripción ha comenzado. El archivo de salida es C:\Users\Franj\OneDrive\Escritorio\Operacionales/Tarea.txt
+PS C:\Users\Franj\onedrive\escritorio\operacionales> new-Item archivo1.txt
+
+
+    Directorio: C:\Users\Franj\onedrive\escritorio\operacionales
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+-a----    21/02/2020  11:18 a. m.              0 archivo1.txt
+
+
+PS C:\Users\Franj\onedrive\escritorio\operacionales> new-Item archivo2.txt -Value "Hola"
+
+
+    Directorio: C:\Users\Franj\onedrive\escritorio\operacionales
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+-a----    21/02/2020  11:19 a. m.              4 archivo2.txt
+
+
+PS C:\Users\Franj\onedrive\escritorio\operacionales> remove-item archivo1.txt
+PS C:\Users\Franj\onedrive\escritorio\operacionales> ls
+
+
+    Directorio: C:\Users\Franj\onedrive\escritorio\operacionales
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+-a----    21/02/2020  11:19 a. m.              4 archivo2.txt
+-a----    21/02/2020  11:30 a. m.           1495 Tarea.txt
+
+
+PS C:\Users\Franj\onedrive\escritorio\operacionales> new-Item archivo1.txt -Value "Prueba"
+
+
+    Directorio: C:\Users\Franj\onedrive\escritorio\operacionales
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+-a----    21/02/2020  11:30 a. m.              6 archivo1.txt
+
+
+PS C:\Users\Franj\onedrive\escritorio\operacionales> diff -Ref (Get-Content archivo1.txt) -diff (Get-Content archivo2.txt) 
+
+InputObject SideIndicator
+----------- -------------
+Hola        =>
+Prueba      <=
+
+
+PS C:\Users\Franj\onedrive\escritorio\operacionales> get-service | export-csv servicios.csv | out-file
+>> ErrorTerminación(Out-File): "No se puede procesar el argumento porque el valor del argumento "path" es NULL. Cambie el valor del argumento "path" a un valor no nulo."
+out-file : No se puede procesar el argumento porque el valor del argumento "path" es NULL. Cambie el valor del 
+argumento "path" a un valor no nulo.
+En línea: 1 Carácter: 42
++ get-service | export-csv servicios.csv | out-file
++                                          ~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (:) [Out-File], PSArgumentNullException
+    + FullyQualifiedErrorId : ArgumentNull,Microsoft.PowerShell.Commands.OutFileCommand
+out-file : No se puede procesar el argumento porque el valor del argumento "path" es NULL.
+Cambie el valor del argumento "path" a un valor no nulo.
+En línea: 1 Carácter: 42
++ get-service | export-csv servicios.csv | out-file
++                                          ~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (:) [Out-File], PSArgumentNullException
+    + FullyQualifiedErrorId : ArgumentNull,Microsoft.PowerShell.Commands.OutFileCommand
+
+PS C:\Users\Franj\onedrive\escritorio\operacionales> get-service | export-csv -path ./servicios.csv | out-file -FilePath "./operacionales"
+PS C:\Users\Franj\onedrive\escritorio\operacionales> <# porque faltaba la ruta de ubicacion #>
+PS C:\Users\Franj\onedrive\escritorio\operacionales> get-process | export-csv procesos.csv -Delimiter ';'
+PS C:\Users\Franj\onedrive\escritorio\operacionales> <# para colocar solo lectura set-itemproperty -path archivo -name Attributes -value "ReadOnly" #>
+PS C:\Users\Franj\onedrive\escritorio\operacionales> set-itemproperty -path .\archivo2.txt -name Attributes -value "ReadOnly"
+PS C:\Users\Franj\onedrive\escritorio\operacionales> ls
+
+
+    Directorio: C:\Users\Franj\onedrive\escritorio\operacionales
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+-a----    21/02/2020  11:30 a. m.              6 archivo1.txt
+--r---    21/02/2020  11:19 a. m.              4 archivo2.txt
+-a----    21/02/2020  11:35 a. m.              0 operacionales
+-a----    21/02/2020  11:43 a. m.         117505 procesos.csv
+-a----    21/02/2020  11:35 a. m.          72699 servicios.csv
+-a----    21/02/2020  11:43 a. m.           3967 Tarea.txt
+
+
+PS C:\Users\Franj\onedrive\escritorio\operacionales> set-itemproperty -path .\archivo2.txt -name Attributes -value "archive"
+PS C:\Users\Franj\onedrive\escritorio\operacionales> ls
+
+
+    Directorio: C:\Users\Franj\onedrive\escritorio\operacionales
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+-a----    21/02/2020  11:30 a. m.              6 archivo1.txt
+-a----    21/02/2020  11:19 a. m.              4 archivo2.txt
+-a----    21/02/2020  11:35 a. m.              0 operacionales
+-a----    21/02/2020  11:43 a. m.         117505 procesos.csv
+-a----    21/02/2020  11:35 a. m.          72699 servicios.csv
+-a----    21/02/2020  11:49 a. m.           4868 Tarea.txt
+
+
+PS C:\Users\Franj\onedrive\escritorio\operacionales> help Get-ExecutionPolicy
+
+NOMBRE
+    Get-ExecutionPolicy
+
+SINOPSIS
+    Gets the execution policies for the current session.
+
+
+SINTAXIS
+    Get-ExecutionPolicy [[-Scope] {Process | CurrentUser | LocalMachine | UserPolicy |
+    MachinePolicy}] [-List] [<CommonParameters>]
+
+
+DESCRIPCIÓN
+    The Get-ExecutionPolicy cmdlet gets the execution policies for the current session.
+
+    The execution policy is determined by execution policies that you set by using
+    Set-ExecutionPolicy and the Group Policy settings for the Windows PowerShell execution
+    policy. The default value is Restricted.
+
+    Without parameters, Get-ExecutionPolicy gets the execution policy that is effective in
+    the session. You can use the List parameter to get all execution policies that affect
+    the session or the Scope parameter to get the execution policy for a particular scope.
+
+    For more information, see about_Execution_Policies
+    (http://go.microsoft.com/fwlink/?LinkID=135170).
+
+
+VÍNCULOS RELACIONADOS
+    Online Version: http://go.microsoft.com/fwlink/?LinkId=821714
+    Get-AuthenticodeSignature
+    Set-AuthenticodeSignature
+    Set-ExecutionPolicy
+
+NOTAS
+    Para ver los ejemplos, escriba: "get-help Get-ExecutionPolicy -examples".
+    Para obtener más información, escriba: "get-help Get-ExecutionPolicy -detailed".
+    Para obtener información técnica, escriba: "get-help Get-ExecutionPolicy -full".
+    Para obtener ayuda disponible en línea, escriba: "get-help Get-ExecutionPolicy -online"
+
+
+PS C:\Users\Franj\onedrive\escritorio\operacionales> help set-ExecutionPolicy
+
+NOMBRE
+    Set-ExecutionPolicy
+
+SINOPSIS
+    Changes the user preference for the Windows PowerShell execution policy.
+
+
+SINTAXIS
+    Set-ExecutionPolicy [-ExecutionPolicy] {Unrestricted | RemoteSigned | AllSigned |
+    Restricted | Default | Bypass | Undefined} [[-Scope] {Process | CurrentUser |
+    LocalMachine | UserPolicy | MachinePolicy}] [-Confirm] [-Force] [-WhatIf]
+    [<CommonParameters>]
+
+
+DESCRIPCIÓN
+    The Set-ExecutionPolicy cmdlet changes the user preference for the Windows PowerShell
+    execution policy.
+
+    The execution policy is part of the security strategy of Windows PowerShell. It
+    determines whether you can load configuration files (including your Windows PowerShell
+    profile) and run scripts, and it determines which scripts, if any, must be digitally
+    signed before they will run. For more information, see about_Execution_Policies
+    (http://go.microsoft.com/fwlink/?LinkID=135170).
+
+    To change the execution policy for the default (LocalMachine) scope, start Windows
+    PowerShell with the "Run as administrator" option.
+
+
+VÍNCULOS RELACIONADOS
+    Online Version: http://go.microsoft.com/fwlink/?LinkId=821719
+    Get-AuthenticodeSignature
+    Get-ExecutionPolicy
+    Set-AuthenticodeSignature
+
+NOTAS
+    Para ver los ejemplos, escriba: "get-help Set-ExecutionPolicy -examples".
+    Para obtener más información, escriba: "get-help Set-ExecutionPolicy -detailed".
+    Para obtener información técnica, escriba: "get-help Set-ExecutionPolicy -full".
+    Para obtener ayuda disponible en línea, escriba: "get-help Set-ExecutionPolicy -online"
+
+
+PS C:\Users\Franj\onedrive\escritorio\operacionales> Get-Random 200
+50
+PS C:\Users\Franj\onedrive\escritorio\operacionales> Get-Date
+
+viernes, 21 de febrero de 2020 12:30:39 p. m.
+
+
+PS C:\Users\Franj\onedrive\escritorio\operacionales> help Get-Date
+
+NOMBRE
+    Get-Date
+
+SINOPSIS
+    Gets the current date and time.
+
+
+SINTAXIS
+    Get-Date [[-Date] <DateTime>] [-Day <Int32>] [-DisplayHint {Date | Time | DateTime}]
+    [-Format <String>] [-Hour <Int32>] [-Millisecond <Int32>] [-Minute <Int32>] [-Month
+    <Int32>] [-Second <Int32>] [-Year <Int32>] [<CommonParameters>]
+
+    Get-Date [[-Date] <DateTime>] [-Day <Int32>] [-DisplayHint {Date | Time | DateTime}]
+    [-Hour <Int32>] [-Millisecond <Int32>] [-Minute <Int32>] [-Month <Int32>] [-Second
+    <Int32>] [-UFormat <String>] [-Year <Int32>] [<CommonParameters>]
+
+
+DESCRIPCIÓN
+    The Get-Date cmdlet gets a DateTime object that represents the current date or a date
+    that you specify. It can format the date and time in several Windows and UNIX formats.
+    You can use Get-Date to generate a date or time character string, and then send the
+    string to other cmdlets or programs.
+
+
+VÍNCULOS RELACIONADOS
+    Online Version: http://go.microsoft.com/fwlink/?LinkId=821781
+    New-TimeSpan
+    Set-Date
+
+NOTAS
+    Para ver los ejemplos, escriba: "get-help Get-Date -examples".
+    Para obtener más información, escriba: "get-help Get-Date -detailed".
+    Para obtener información técnica, escriba: "get-help Get-Date -full".
+    Para obtener ayuda disponible en línea, escriba: "get-help Get-Date -online"
+
+
+PS C:\Users\Franj\onedrive\escritorio\operacionales> help Get-Date -Full
+
+NOMBRE
+    Get-Date
+
+SINOPSIS
+    Gets the current date and time.
+
+
+SINTAXIS
+    Get-Date [[-Date] <DateTime>] [-Day <Int32>] [-DisplayHint {Date | Time | DateTime}]
+    [-Format <String>] [-Hour <Int32>] [-Millisecond <Int32>] [-Minute <Int32>] [-Month
+    <Int32>] [-Second <Int32>] [-Year <Int32>] [<CommonParameters>]
+
+    Get-Date [[-Date] <DateTime>] [-Day <Int32>] [-DisplayHint {Date | Time | DateTime}]
+    [-Hour <Int32>] [-Millisecond <Int32>] [-Minute <Int32>] [-Month <Int32>] [-Second
+    <Int32>] [-UFormat <String>] [-Year <Int32>] [<CommonParameters>]
+
+
+DESCRIPCIÓN
+    The Get-Date cmdlet gets a DateTime object that represents the current date or a date
+    that you specify. It can format the date and time in several Windows and UNIX formats.
+    You can use Get-Date to generate a date or time character string, and then send the
+    string to other cmdlets or programs.
+
+
+PARÁMETROS
+    -Date <DateTime>
+        Specifies a date and time. By default, Get-Date gets the current system date and
+        time.
+
+        Type the date in a format that is standard for the system locale, such as
+        dd-MM-yyyy (German [Germany]) or MM/dd/yyyy (English [United States]).
+
+        ¿Requerido?                  false
+        ¿Posición?                   0
+        Valor predeterminado         None
+        ¿Aceptar canalización?       True (ByPropertyName, ByValue)
+        ¿Aceptar caracteres comodín? false
+
+    -Day <Int32>
+        Specifies the day of the month that is displayed. Enter a value from 1 to 31. The
+        default is the current day.
+
+        If you specify a value that is greater than the number of days in the month,
+        Windows PowerShell adds the number of days to the month and displays the result.
+        For instance, `Get-Date -Month 2 -Day 31` displays March 3, not February 31.
+
+        ¿Requerido?                  false
+        ¿Posición?                   named
+        Valor predeterminado         None
+        ¿Aceptar canalización?       False
+        ¿Aceptar caracteres comodín? false
+
+    -DisplayHint <DisplayHintType>
+        Determines which elements of the date and time are displayed. The acceptable
+        values for this parameter are:
+
+        - Date. Displays only the date. - Time. Displays only the time. - DateTime.
+        Displays the date and time.
+
+        DateTime is the default. This parameter does not affect the DateTime object that
+        Get-Date gets.
+
+        ¿Requerido?                  false
+        ¿Posición?                   named
+        Valor predeterminado         None
+        ¿Aceptar canalización?       False
+        ¿Aceptar caracteres comodín? false
+
+    -Format <String>
+        Displays the date and time in the Microsoft .NET Framework format indicated by the
+        format specifier. Enter a format specifier. For a list of available format
+        specifiers, see DateTimeFormatInfo Classhttp://msdn.microsoft.com/library/system.gl
+        obalization.datetimeformatinfo.aspx
+        (http://msdn.microsoft.com/library/system.globalization.datetimeformatinfo.aspx)
+        in MSDN.
+
+        When you use the Format parameter, Windows PowerShell gets only the properties of
+        the DateTime object that it needs to display the date in the format that you
+        specify. As a result, some of the properties and methods of DateTime objects might
+        not be available.
+
+        Starting in Windows PowerShell 5.0, you can use the following additional formats
+        as values for the Format parameter.
+
+        - FileDate. A file or path-friendly representation of the current date in local
+        time. It is in the form of yyyymmdd ( using 4 digits, 2 digits, and 2 digits). An
+        example of results when you use this format is 20150302.
+
+        - FileDateUniversal. A file or path-friendly representation of the current date in
+        universal time. It is in the form of yyyymmdd + 'Z' (using 4 digits, 2 digits, and
+        2 digits). An example of results when you use this format is 20150302Z.
+
+        - FileDateTime. A file or path-friendly representation of the current date and
+        time in local time, in 24-hour format. It is in the form of yyyymmdd + 'T' +
+        hhmmssmsms, where msms is a four-character representation of milliseconds. An
+        example of results when you use this format is 20150302T1240514987.
+
+        - FileDateTimeUniversal. A file or path-friendly representation of the current
+        date and time in universal time, in 24-hour format. It is in the form of yyyymmdd
+        + 'T' + hhmmssmsms, where msms is a four-character representation of milliseconds,
+        + 'Z'. An example of results when you use this format is 20150302T0840539947Z.
+
+        ¿Requerido?                  false
+        ¿Posición?                   named
+        Valor predeterminado         None
+        ¿Aceptar canalización?       False
+        ¿Aceptar caracteres comodín? false
+
+    -Hour <Int32>
+        Specifies the hour that is displayed. Enter a value from 1 to 23. The default is
+        the current hour.
+
+        ¿Requerido?                  false
+        ¿Posición?                   named
+        Valor predeterminado         None
+        ¿Aceptar canalización?       False
+        ¿Aceptar caracteres comodín? false
+
+    -Millisecond <Int32>
+        Specifies the milliseconds in the date. Enter a value from 0 to 999. The default
+        is the current number of milliseconds.
+
+        This parameter was introduced in Windows PowerShell 3.0.
+
+        ¿Requerido?                  false
+        ¿Posición?                   named
+        Valor predeterminado         None
+        ¿Aceptar canalización?       False
+        ¿Aceptar caracteres comodín? false
+
+    -Minute <Int32>
+        Specifies the minute that is displayed. Enter a value from 1 to 59. The default
+        value is the current minutes.
+
+        ¿Requerido?                  false
+        ¿Posición?                   named
+        Valor predeterminado         None
+        ¿Aceptar canalización?       False
+        ¿Aceptar caracteres comodín? false
+
+    -Month <Int32>
+        Specifies the month that is displayed. Enter a value from 1 to 12. The default is
+        the current month.
+
+        ¿Requerido?                  false
+        ¿Posición?                   named
+        Valor predeterminado         None
+        ¿Aceptar canalización?       False
+        ¿Aceptar caracteres comodín? false
+
+    -Second <Int32>
+        Specifies the second that is displayed. Enter a value from 1 to 59. The default is
+        the current second.
+
+        ¿Requerido?                  false
+        ¿Posición?                   named
+        Valor predeterminado         None
+        ¿Aceptar canalización?       False
+        ¿Aceptar caracteres comodín? false
+
+    -UFormat <String>
+        Displays the date and time in UNIX format. For a list of the format specifiers,
+        see the Notes section.
+
+        When you use the UFormat parameter, Windows PowerShell gets only the properties of
+        the DateTime object that it needs to display the date in the format that you
+        specify. As a result, some of the properties and methods of DateTime objects might
+        not be available.
+
+        ¿Requerido?                  false
+        ¿Posición?                   named
+        Valor predeterminado         None
+        ¿Aceptar canalización?       False
+        ¿Aceptar caracteres comodín? false
+
+    -Year <Int32>
+        Specifies the year that is displayed. Enter a value from 1 to 9999. The default is
+        the current year.
+
+        ¿Requerido?                  false
+        ¿Posición?                   named
+        Valor predeterminado         None
+        ¿Aceptar canalización?       False
+        ¿Aceptar caracteres comodín? false
+
+    <CommonParameters>
+        Este cmdlet admite los parámetros comunes: Verbose, Debug,
+        ErrorAction, ErrorVariable, WarningAction, WarningVariable,
+        OutBuffer, PipelineVariable y OutVariable. Para obtener más información, consulta
+        about_CommonParameters (https:/go.microsoft.com/fwlink/?LinkID=113216).
+
+ENTRADAS
+    None
+        You cannot pipe input to this cmdlet.
+
+
+SALIDAS
+    System.DateTime or System.String
+        When you use the Format or UFormat parameters, Get-Date returns a string.
+        Otherwise, it returns a DateTime object.
+
+
+NOTAS
+
+
+        * By default, the date-time is displayed in long-date and long-time formats for
+        the system locale.
+
+        When you pipe a date to cmdlets that expect string input, such as the Add-Content
+        cmdlet, Windows PowerShell converts the DateTime object to a string before adding
+        it to the file. The default ToString() format is short date and long time. To
+        specify an alternate format, use the Format or UFormat parameter of Get-Date .
+
+        Uformat Values:
+
+        The following are the values of the UFormat parameter. The format for the command
+        is:
+
+        Get-Date -UFormat %<value>
+
+        For example,
+
+        Get-Date -UFormat %d
+
+        Date-Time:
+
+        Date and time - full
+
+        (default) (Friday, June 16, 2006 10:31:27 AM)
+
+        c     Date and time - abbreviated (Fri Jun 16 10:31:27 2006)
+        Date:
+
+        D    Date in mm/dd/yy format (06/14/06)
+
+        x    Date in standard format for locale (09/12/07 for English-US)
+
+        Year:
+
+        C   Century (20 for 2006)
+
+        Y   Year in 4-digit format (2006)
+
+        y   Year in 2-digit format (06)
+
+        G   Same as 'Y'
+
+        g   Same as 'y'
+
+        Month:
+
+        b   Month name - abbreviated (Jan)
+
+        B   Month name - full (January)
+
+        h   Same as 'b'
+
+        m   Month number (06)
+
+        Week:
+
+        W  Week of the year (00-52)
+
+        V   Week of the year (01-53)
+
+        U   Same as 'W'
+
+        Day:
+
+        a   Day of the week - abbreviated name (Mon)
+
+        A   Day of the week - full name (Monday)
+
+        u   Day of the week - number (Monday = 1)
+
+        d   Day of the month - 2 digits (05)
+
+        e   Day of the month - digit preceded by a space ( 5)
+
+        j    Day of the year - (1-366)
+
+        w   Same as 'u'
+
+        Time:
+
+        p   AM or PM
+
+        r   Time in 12-hour format (09:15:36 AM)
+
+        R   Time in 24-hour format - no seconds (17:45)
+
+        T   Time in 24 hour format (17:45:52)
+
+        X   Same as 'T'
+
+        Z   Time zone offset from Universal Time Coordinate (UTC) (-07)
+
+        Hour:
+
+        H   Hour in 24-hour format (17)
+
+        I    Hour in 12 hour format (05)
+
+        k   Same as 'H'
+
+        l    Same as 'I' (Upper-case I = Lower-case L)
+
+        Minutes & Seconds:
+
+        M   Minutes (35)
+
+        S   Seconds (05)
+
+        s   Seconds elapsed since January 1, 1970 00:00:00 (1150451174.95705)
+
+        Special Characters:
+
+        n   newline character (\n)
+
+        t   Tab character (\t)
+
+        *
+
+    Example 1: Get the date and display it
+
+    PS C:\>Get-Date -DisplayHint Date
+    Tuesday, June 13, 2006
+
+    This command gets a DateTime object, but it displays only the date. It uses the
+    DisplayHint parameter to indicate that only the date is to be displayed.
+    Example 2: Get the date and time in short format
+
+    PS C:\>Get-Date -Format g
+    6/13/2006 12:43 PM
+
+    This command gets the current date and time and formats it in short-date and
+    short-time format. It uses the .NET Framework g format specifier (General [short date
+    and short time]) to specify the format.
+    Example 3: Get the date and time in UNIX format
+
+    PS C:\>Get-Date -UFormat "%Y / %m / %d / %A / %Z"
+    2006 / 06 / 13 / Tuesday / -07
+
+    This command gets the current date and time and formats it as specified by the
+    command. In this case, the format includes the full year (%Y), the two-digit numeric
+    month (%m), the date (%d), the full day of the week (%A), and the offset from UTC
+    (Zulu).
+    Example 4: Get the day of the year for the current date
+
+    PS C:\>(Get-Date -Year 2000 -Month 12 -Day 31).DayOfYear
+    366
+
+    This command displays the day of the year for the current date. For example, December
+    31 is the 365th day of 2006, but it is the 366th day of 2000.
+    Example 5: Determine whether the date and time are adjusted for Daylight Saving Time
+
+    PS C:\>$A = Get-Date
+    PS C:\>$A.IsDaylightSavingTime()
+    True
+
+    These commands tell you whether the current date and time are adjusted for daylight
+    saving time in the current locale.
+
+    The first command creates a variable named $A, and then assigns the object retrieved
+    by Get-Date to the $A variable. Then, it uses the IsDaylightSavingTime method on the
+    object in $A.
+
+    To see the properties and methods of the DateTime object, type:
+
+    `Get-Date | Get-Member`.
+    Example 6: Convert the current date and time to UTC time
+
+    PS C:\>$A = Get-Date
+    PS C:\>$A.ToUniversalTime()
+    Tuesday, June 13, 2006 8:09:19 PM
+
+    These commands convert the current date and time to UTC time.
+
+    The first command creates a variable named $A, and then assigns the object retrieved
+    by Get-Date to the $A variable. Then, it uses the ToUniversalTime method on the object
+    in $A.
+    Example 7: Convert a WMI DATETIME object to a .NET Framework DateTime object
+
+    PS C:\>$A = Get-WmiObject Win32_Bios -Computer Server01
+    PS C:\>$A | Format-List -Property Name, @{Label="BIOS Age";Expression={(Get-Date) -
+    $_.ConvertToDateTime($_.ReleaseDate)}}
+    Name     : Default System BIOS
+    BIOS Age : 1345.17:31:07.1091047
+
+    Windows Management Instrumentation (WMI) uses a different DATETIME object than the
+    .NET Framework DateTime object that Get-Date returns. To use DATETIME information from
+    WMI in a command with DateTime information from Get-Date , you have to use the
+    ConvertToDateTime method to convert WMI CIM_DATETIME objects to .NET Framework
+    DateTime objects.
+
+    The commands in this example display the name and age of the BIOS on a remote
+    computer, Server01.
+
+    The first command uses the Get-WmiObject cmdlet to get an instance of the Win32_BIOS
+    class on Server01 and then stores it in the $A variable.
+
+    The second command uses the pipeline operator (|) to send the WMI object stored in $A
+    to the Format-List cmdlet. The Property parameter of Format-List specifies two
+    properties to display in the list, Name and BIOS Age. The BIOS Age property is
+    specified in a hash table. The table includes the Label key, which specifies the name
+    of the property, and the Expression key, which contains the expression that calculates
+    the BIOS age. The expression uses the ConvertToDateTime method to convert each
+    instance of ReleaseDate to a .NET Framework DateTime object. Then, the value is
+    subtracted from the value of the Get-Date cmdlet, which, without parameters, gets the
+    current date.
+    Example 8: Get the long date and long time format for the current date and time
+
+    PS C:\>Get-Date
+    Tuesday, June 13, 2006 12:43:42 PM
+
+    This command gets a DateTime object and displays the current date and time in the long
+    date and long time formats for the system locale, as though you typed `Get-Date
+    -Format F`.
+    Example 9: Convert a DateTime object to a string and add it to a file
+
+    PS C:\>Get-Date
+    Tuesday, September 26, 2006 11:25:31 AM PS C:\>(Get-Date).ToString()
+    9/26/2006 11:25:31 AM PS C:\>Get-Date | Add-Content Test.txt
+    # Adds 9/26/2006 11:25:31 AM PS C:\>Get-Date -Format F | Add-Content Test.txt
+    # Adds Tuesday, September 26, 2006 11:25:31 AM
+
+    These commands demonstrate how to use Get-Date with Add-Content and other cmdlets that
+    convert the DateTime object that Get-Date generates to a string.
+
+    The first command shows that the default display from a Get-Date command is in
+    long-date and long-time format.
+
+    The second command shows that the default display from the ToString() method of the
+    DateTime object is in short-date and short-time format.
+
+    The third command uses a pipeline operator to send the DateTime object to the
+    Add-Content cmdlet, which adds the content to the Test.txt file. Because Add-Content
+    uses the ToString() method of the DateTime object, the date that is added is in
+    short-date and short-time format.
+
+    The fourth command uses the Format parameter of Get-Date to specify the format. When
+    you use the Format or UFormat parameters, Get-Date generates a string, not a DateTime
+    object. Then, when you send the string to Add-Content , it adds the string to the
+    Test.txt file without changing it.
+    Example 10: Create a timestamp to use to name a directory
+
+    The first command uses the *Format* parameter with a value of o to generate a
+    timestamp string.
+    PS C:\>Get-Date -Format o
+    2012-03-08T10:55:55.6083839-08:00
+
+    The second command prepares the timestamp to be used in a directory name. The command
+    replaces the colon characters (:) in the string with dots (.) and saves the result in
+    the $TimeStamp variable. Replacing the colons prevents the characters that precede
+    each colon from being interpreted as a drive name.
+    PS C:\>$TimeStamp = Get-Date -Format o | foreach {$_ -replace ":", "."}
+
+    The third command uses the Mkdir function to create a directory with the name in the
+    $TimeStamp variable.
+    PS C:\>mkdir C:\ps-test\$TimeStamp
+    Directory: C:\ps-test
+
+    Mode                LastWriteTime     Length Name
+    ----                -------------     ------ ----
+    d----          3/8/2012  11:01 AM            2012-03-08T11.00.24.4192623-08.00
+
+    This example shows how to use the Get-Date cmdlet to create a timestamp and how to use
+    the timestamp in or as part of a directory name.
+
+VÍNCULOS RELACIONADOS
+    Online Version: http://go.microsoft.com/fwlink/?LinkId=821781
+    New-TimeSpan
+    Set-Date
+
+
+
+PS C:\Users\Franj\onedrive\escritorio\operacionales> <# System.DateTime or System.String #>
+PS C:\Users\Franj\onedrive\escritorio\operacionales> get-date | Select-Object -Property DayoFWeek
+
+DayOfWeek
+---------
+   Friday
+
+
+PS C:\Users\Franj\onedrive\escritorio\operacionales> Get-HotFix
+
+Source        Description      HotFixID      InstalledBy          InstalledOn
+------        -----------      --------      -----------          -----------
+VLAD          Update           KB4534132     NT AUTHORITY\SYSTEM  20/02/2020 12:00:00 a. m.
+VLAD          Security Update  KB4515383     NT AUTHORITY\SYSTEM  15/01/2020 12:00:00 a. m.
+VLAD          Security Update  KB4516115     NT AUTHORITY\SYSTEM  15/01/2020 12:00:00 a. m.
+VLAD          Security Update  KB4520390     NT AUTHORITY\SYSTEM  15/01/2020 12:00:00 a. m.
+VLAD          Security Update  KB4521863     NT AUTHORITY\SYSTEM  15/01/2020 12:00:00 a. m.
+VLAD          Security Update  KB4524569     NT AUTHORITY\SYSTEM  15/01/2020 12:00:00 a. m.
+VLAD          Security Update  KB4528759     NT AUTHORITY\SYSTEM  15/01/2020 12:00:00 a. m.
+VLAD          Security Update  KB4537759     NT AUTHORITY\SYSTEM  20/02/2020 12:00:00 a. m.
+VLAD          Security Update  KB4538674     NT AUTHORITY\SYSTEM  14/02/2020 12:00:00 a. m.
+VLAD          Update           KB4532693     NT AUTHORITY\SYSTEM  20/02/2020 12:00:00 a. m.
+
+
+PS C:\Users\Franj\onedrive\escritorio\operacionales> Get-HotFix | select -Property InstalledOn,InstalledBy,HotfixID | sort InstalledOn
+
+InstalledOn               InstalledBy         HotfixID
+-----------               -----------         --------
+15/01/2020 12:00:00 a. m. NT AUTHORITY\SYSTEM KB4515383
+15/01/2020 12:00:00 a. m. NT AUTHORITY\SYSTEM KB4516115
+15/01/2020 12:00:00 a. m. NT AUTHORITY\SYSTEM KB4520390
+15/01/2020 12:00:00 a. m. NT AUTHORITY\SYSTEM KB4521863
+15/01/2020 12:00:00 a. m. NT AUTHORITY\SYSTEM KB4524569
+15/01/2020 12:00:00 a. m. NT AUTHORITY\SYSTEM KB4528759
+14/02/2020 12:00:00 a. m. NT AUTHORITY\SYSTEM KB4538674
+20/02/2020 12:00:00 a. m. NT AUTHORITY\SYSTEM KB4534132
+20/02/2020 12:00:00 a. m. NT AUTHORITY\SYSTEM KB4537759
+20/02/2020 12:00:00 a. m. NT AUTHORITY\SYSTEM KB4532693
+
+
+PS C:\Users\Franj\onedrive\escritorio\operacionales> Get-HotFix | select -Property InstalledOn,HotfixID,Description | sort Description | ConvertTo-Html
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>HTML TABLE</title>
+</head><body>
+<table>
+<colgroup><col/><col/><col/></colgroup>
+<tr><th>InstalledOn</th><th>HotfixID</th><th>Description</th></tr>
+<tr><td>15/01/2020 12:00:00 a. m.</td><td>KB4515383</td><td>Security Update</td></tr>
+<tr><td>15/01/2020 12:00:00 a. m.</td><td>KB4516115</td><td>Security Update</td></tr>
+<tr><td>15/01/2020 12:00:00 a. m.</td><td>KB4520390</td><td>Security Update</td></tr>
+<tr><td>15/01/2020 12:00:00 a. m.</td><td>KB4521863</td><td>Security Update</td></tr>
+<tr><td>15/01/2020 12:00:00 a. m.</td><td>KB4524569</td><td>Security Update</td></tr>
+<tr><td>15/01/2020 12:00:00 a. m.</td><td>KB4528759</td><td>Security Update</td></tr>
+<tr><td>20/02/2020 12:00:00 a. m.</td><td>KB4537759</td><td>Security Update</td></tr>
+<tr><td>14/02/2020 12:00:00 a. m.</td><td>KB4538674</td><td>Security Update</td></tr>
+<tr><td>20/02/2020 12:00:00 a. m.</td><td>KB4534132</td><td>Update</td></tr>
+<tr><td>20/02/2020 12:00:00 a. m.</td><td>KB4532693</td><td>Update</td></tr>
+</table>
+</body></html>
+PS C:\Users\Franj\onedrive\escritorio\operacionales> Get-HotFix | select -Property InstalledOn,HotfixID,Description | sort Description | ConvertTo-Html | Out-File Fix.html
+PS C:\Users\Franj\onedrive\escritorio\operacionales> ls
+
+
+    Directorio: C:\Users\Franj\onedrive\escritorio\operacionales
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+-a----    21/02/2020  11:30 a. m.              6 archivo1.txt
+-a----    21/02/2020  11:19 a. m.              4 archivo2.txt
+-a----    21/02/2020  12:48 p. m.           2408 Fix.html
+-a----    21/02/2020  11:35 a. m.              0 operacionales
+-a----    21/02/2020  11:43 a. m.         117505 procesos.csv
+-a----    21/02/2020  11:35 a. m.          72699 servicios.csv
+-a----    21/02/2020  12:07 p. m.           5616 Tarea.txt
+
+
+PS C:\Users\Franj\onedrive\escritorio\operacionales> <# si no se define un nombre y tipo de salida en el out-file sale error#>
+PS C:\Users\Franj\onedrive\escritorio\operacionales> Get-HotFix | select -Property InstalledOn,HotfixID,Description | sort Description | ConvertTo-Html | Out-File 
+>> ErrorTerminación(Out-File): "No se puede procesar el argumento porque el valor del argumento "path" es NULL. Cambie el valor del argumento "path" a un valor no nulo."
+Out-File : No se puede procesar el argumento porque el valor del argumento "path" es NULL. Cambie el valor del 
+argumento "path" a un valor no nulo.
+En línea: 1 Carácter: 102
++ ... n,HotfixID,Description | sort Description | ConvertTo-Html | Out-File
++                                                                  ~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (:) [Out-File], PSArgumentNullException
+    + FullyQualifiedErrorId : ArgumentNull,Microsoft.PowerShell.Commands.OutFileCommand
+Out-File : No se puede procesar el argumento porque el valor del argumento "path" es NULL.
+Cambie el valor del argumento "path" a un valor no nulo.
+En línea: 1 Carácter: 102
++ ... n,HotfixID,Description | sort Description | ConvertTo-Html | Out-File
++                                                                  ~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (:) [Out-File], PSArgumentNullException
+    + FullyQualifiedErrorId : ArgumentNull,Microsoft.PowerShell.Commands.OutFileCommand
+
+PS C:\Users\Franj\onedrive\escritorio\operacionales> <# aunque puede salir solo como tipo archivo#>
+PS C:\Users\Franj\onedrive\escritorio\operacionales>  Get-EventLog system -Newest 50 | select -Property index,TimeGenerated,source | sort time,index | Out-File Fix.txt
+PS C:\Users\Franj\onedrive\escritorio\operacionales> Stop-Transcript
+**********************
+Fin de la transcripción de Windows PowerShell
+Hora de finalización: 20200221130957
+**********************
